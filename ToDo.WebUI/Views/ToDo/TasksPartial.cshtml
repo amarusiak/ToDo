@@ -1,0 +1,27 @@
+﻿@model List<ToDo.Entities.TaskEntity>
+
+<p>
+    TasksPartial View invoked
+</p>
+
+@foreach (var task in Model)
+{
+    <tr class="data-row">
+        <td style="padding: 10px;">@task.Id</td>
+        <td style="padding: 10px;">@task.Title</td>
+
+        <td style="padding: 10px;">
+            <input type="checkbox" value="@task.IsDone" class="checkbox" data-task-id="@task.Id"/>
+        </td>
+
+        @* A form for deletion*@
+        <td>
+            @* <form method="post" action="/todo/delete?taskId=@Model.Id"> *@
+            <form method="post" action="/todo/delete">
+                <input type="hidden" name="taskId" value="@task.Id" />
+                <input type="submit" name="Delete" value="Delete" style="padding: 10px;" />
+                <a href="/todo/edit?id=@task.Id" style="padding:10px;">Edit</a>
+            </form>
+        </td>
+    </tr>
+}
